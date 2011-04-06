@@ -62,9 +62,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.c2d2.MySettings
+        Friend ReadOnly Property Settings() As Global.Clipboard2Desktop.MySettings
             Get
-                Return Global.c2d2.MySettings.Default
+                Return Global.Clipboard2Desktop.MySettings.Default
             End Get
         End Property
     End Module

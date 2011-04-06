@@ -11,11 +11,11 @@ Imports System.Windows
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("c2d2")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("c2d2")> 
-<Assembly: AssemblyCopyright("Copyright @  2011")> 
+<Assembly: AssemblyTitle("Clipboard 2 Desktop")> 
+<Assembly: AssemblyDescription("Copies clipboard contents")> 
+<Assembly: AssemblyCompany("Donat Studios")> 
+<Assembly: AssemblyProduct("Clipboard 2 Desktop")> 
+<Assembly: AssemblyCopyright("Donat Studios @  2011")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: ComVisible(false)>
 
@@ -55,5 +55,5 @@ Imports System.Windows
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("2.0.0.0")> 
+<Assembly: AssemblyFileVersion("2.0.0.0")> 
