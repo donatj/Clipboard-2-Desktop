@@ -10,9 +10,22 @@ Class Application
         SaveAs.ApplicationPath = System.Reflection.Assembly.GetExecutingAssembly.Location()
         SaveAs.Title = "Save as..."
         SaveAs.Arguments = "-saveas"
+
         jl.JumpItems.Add(SaveAs)
 
+        Dim Configuration As New JumpTask
+        Configuration.ApplicationPath = System.Reflection.Assembly.GetExecutingAssembly.Location()
+        Configuration.Title = "Configuration"
+        Configuration.CustomCategory = "Settings"
+        Configuration.Arguments = "-config"
+
+        jl.JumpItems.Add(Configuration)
         jl.Apply()
+
+        If My.Settings.defaultDestination = "" Or Not IO.Directory.Exists(My.Settings.defaultDestination) Then
+            My.Settings.defaultDestination = My.Computer.FileSystem.SpecialDirectories.Desktop
+            My.Settings.Save()
+        End If
 
     End Sub
 
@@ -22,7 +35,14 @@ Class Application
     End Enum
 
     Private Sub Application_Startup(ByVal sender As Object, ByVal e As System.Windows.StartupEventArgs) Handles Me.Startup
+
         Dim cbt As New cbType
+
+        If e.Args.Contains("-config") Then
+            Dim wind As New configurationWindow
+            wind.ShowDialog()
+            End
+        End If
 
         If (Clipboard.ContainsText) Then
             cbt = cbType.text
@@ -40,7 +60,6 @@ Class Application
 
             If dlg.ShowDialog Then
                 filepath = dlg.FileName
-                MsgBox(filepath)
             Else
                 End
             End If
@@ -49,6 +68,11 @@ Class Application
         End If
 
         If filepath.Length > 6 And IO.Path.GetFileName(filepath).Length > 3 And IO.Directory.Exists(IO.Path.GetDirectoryName(filepath)) Then
+
+            If IO.File.Exists(filepath) Then
+                MsgBox("Are you sure you want to overwrite " & IO.Path.GetFileName(filepath), MsgBoxStyle.OkCancel, "Warning")
+            End If
+
             Select Case cbt
                 Case cbType.text
 
@@ -57,7 +81,7 @@ Class Application
                 Case cbType.image
 
                     Dim img As Imaging.BitmapSource = Clipboard.GetImage()
-                    Dim fileStream As New IO.FileStream("c:\0.png", IO.FileMode.Create)
+                    Dim fileStream As New IO.FileStream(filepath, IO.FileMode.Create)
                     Dim encoder As New PngBitmapEncoder
                     encoder.Frames.Add(BitmapFrame.Create(img))
                     encoder.Save(fileStream)
@@ -77,10 +101,10 @@ Class Application
     Private Function smallest_not_on_desktop(ByVal type As cbType) As String
         Dim j As Integer = 0
         Dim ext As String = If(type = cbType.image, ".png", ".txt")
-        While IO.File.Exists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\" & j & ext)
+        While IO.File.Exists(My.Settings.defaultDestination & "\" & j & ext)
             j += 1
         End While
-        Return My.Computer.FileSystem.SpecialDirectories.Desktop & "\" & j & ext
+        Return My.Settings.defaultDestination & "\" & j & ext
     End Function
 
 End Class
