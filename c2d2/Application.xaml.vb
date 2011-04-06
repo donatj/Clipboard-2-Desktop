@@ -14,6 +14,7 @@ Class Application
         Dim SaveAs As New JumpTask
         SaveAs.ApplicationPath = System.Reflection.Assembly.GetExecutingAssembly.Location()
         SaveAs.Title = "Save as..."
+        SaveAs.Arguments = "-saveas"
         jl.JumpItems.Add(SaveAs)
 
         jl.Apply()
@@ -21,6 +22,15 @@ Class Application
     End Sub
 
     Private Sub Application_Startup(ByVal sender As Object, ByVal e As System.Windows.StartupEventArgs) Handles Me.Startup
+        Dim filepath As String = ""
+        If e.Args.Contains("-saveas") Then
+            Dim dlg As New Microsoft.Win32.SaveFileDialog
+            If dlg.ShowDialog Then
+                filepath = dlg.FileName
+            End If
+        End If
+
+
         If (Clipboard.ContainsText) Then
             MsgBox("text")
         ElseIf (Clipboard.ContainsImage) Then
