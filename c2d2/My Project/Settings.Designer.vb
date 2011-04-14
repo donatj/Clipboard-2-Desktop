@@ -64,6 +64,18 @@ Partial Friend NotInheritable Class MySettings
             Me("defaultDestination") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("clipping-")>  _
+    Public Property defaultPrefix() As String
+        Get
+            Return CType(Me("defaultPrefix"),String)
+        End Get
+        Set
+            Me("defaultPrefix") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

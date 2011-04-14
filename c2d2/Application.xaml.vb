@@ -108,12 +108,14 @@ Class Application
     End Sub
 
     Private Function smallest_not_on_desktop(ByVal type As cbType) As String
+        Dim prefix As String = My.Settings.defaultPrefix
+        Dim path As String = My.Settings.defaultDestination
         Dim j As Integer = 0
         Dim ext As String = If(type = cbType.image, ".png", ".txt")
-        While IO.File.Exists(My.Settings.defaultDestination & "\" & j & ext)
+        While IO.File.Exists(path & "\" & prefix & j & ext)
             j += 1
         End While
-        Return My.Settings.defaultDestination & "\" & j & ext
+        Return path & "\" & prefix & j & ext
     End Function
 
 End Class

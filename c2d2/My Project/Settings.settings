@@ -5,5 +5,8 @@
     <Setting Name="defaultDestination" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="defaultPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">clipping-</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
