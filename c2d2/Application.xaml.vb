@@ -56,6 +56,15 @@ Class Application
         Dim filepath As String = ""
         If e.Args.Contains("-saveas") Then
             Dim dlg As New Microsoft.Win32.SaveFileDialog
+
+            If cbt = cbType.image Then
+                dlg.DefaultExt = "png"
+                dlg.Filter = "PNG Image (*.png)|*.png|All Files (*.*)|*.*"
+            Else
+                dlg.DefaultExt = "txt"
+                dlg.Filter = "Text File (*.txt)|*.txt|All Files (*.*)|*.*"
+            End If
+
             dlg.AddExtension = True
 
             If dlg.ShowDialog Then
