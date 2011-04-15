@@ -2,6 +2,7 @@
 
     Private Sub ConfigurationWindow_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         defaultSaveLocationTxt.Text = My.Settings.defaultDestination
+        defaultPrefixTxt.Text = My.Settings.defaultPrefix
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
